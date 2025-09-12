@@ -1,13 +1,15 @@
-# Approach
-# 1) Fetch HTML (through Tor if needed).
-# 2) Extract readable text (strip scripts, styles, nav/boilerplate).
-# 3) Normalize text (lowercase, Unicode normalize).
-# 4) Apply matching rules:
-#    - Simple: keywords/phrases (case-insensitive)
-#    - Boolean logic: ALL (AND), ANY (OR), NOT (exclude)
-#    - Regex for patterns
-#    - Optional: fuzzy matching, proximity, weights
-# 5) Return match result and optionally highlight or score.
+'''
+Approach
+1) Fetch HTML (through Tor if needed).
+2) Extract readable text (strip scripts, styles, nav/boilerplate).
+3) Normalize text (lowercase, Unicode normalize).
+4) Apply matching rules:
+   - Simple: keywords/phrases (case-insensitive)
+   - Boolean logic: ALL (AND), ANY (OR), NOT (exclude)
+   - Regex for patterns
+   - Optional: fuzzy matching, proximity, weights
+5) Return match result and optionally highlight or score.
+'''
 
 # Environemnt setup
 # - pip install requests[socks] beautifulsoup4 lxml readability-lxml rapidfuzz
@@ -92,6 +94,7 @@ rules = RuleSet(
     # regexes=[r"\bCVE-\d{4}-\d{4,7}\b"]  # and must contain a CVE pattern
 )
 
+# Modified code:
 urls = ["http://g7ejphhubv5idbbu3hb3wawrs5adw7tkx7yjabnf65xtzztgg4hcsqqd.onion/", "http://archiveiya74codqgiixo33q62qlrqtkgmcitqx5u2oeqnmn5bpcbiyd.onion/"]
 
 for url in urls:
