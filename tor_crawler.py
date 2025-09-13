@@ -25,7 +25,24 @@ How to run (quick)
    }
 
 5) Run:
-    python tor_crawler.py --urls urls.txt --use-tor --tor-port 9150 --tor-isolate-by-domain --rules rules.json --out-dir out --default-region US --delay-min 1.0 --delay-max 3.0 --parquet parquet_out'''
+    python tor_crawler.py --urls urls.txt --use-tor --tor-port 9150 --tor-isolate-by-domain --rules rules.json --out-dir out --default-region US --delay-min 1.0 --delay-max 3.0 --parquet parquet_out
+    
+Notes and options
+- Tor usage:
+  - Ensure Tor is running. Defaults assume a Tor daemon on 127.0.0.1:9050. If using Tor Browser, use --tor-port 9150.
+  - --tor-isolate-by-domain leverages Tor’s IsolateSOCKSAuth: the script sets the SOCKS username to the domain so circuits are separated per site.
+
+- Filtering:
+  - Place keyword rules in a JSON file and point --rules to it.
+  - Regex strings must be valid Python regexes. They must all match somewhere in title OR body to pass.
+
+- Output:
+  - Gzipped JSONL parts in --out-dir (rotated by size). Each record has emails, usernames, phone_numbers, title, status, etc.
+  - Optional Parquet dataset with partitioning by crawl_id (pass --parquet parquet_out).
+
+- Privacy and safety:
+  - The script uses socks5h to avoid DNS leaks and sets a Tor Browser-like UA. It does not store cookies or referrers.
+  - Keep concurrency low (this script is sequential). If you add threads/async, limit to 1–3 with Tor.'''
 
 # Script: tor_crawler.py
 #!/usr/bin/env python3
@@ -429,20 +446,3 @@ if __name__ == "__main__":
 
 # To run:
 # python tor_crawler.py --urls urls.txt --use-tor --tor-port 9150 --tor-isolate-by-domain --rules rules.json --out-dir out --default-region US --delay-min 1.0 --delay-max 3.0 --parquet parquet_out
-
-'''Notes and options
-- Tor usage:
-  - Ensure Tor is running. Defaults assume a Tor daemon on 127.0.0.1:9050. If using Tor Browser, use --tor-port 9150.
-  - --tor-isolate-by-domain leverages Tor’s IsolateSOCKSAuth: the script sets the SOCKS username to the domain so circuits are separated per site.
-
-- Filtering:
-  - Place keyword rules in a JSON file and point --rules to it.
-  - Regex strings must be valid Python regexes. They must all match somewhere in title OR body to pass.
-
-- Output:
-  - Gzipped JSONL parts in --out-dir (rotated by size). Each record has emails, usernames, phone_numbers, title, status, etc.
-  - Optional Parquet dataset with partitioning by crawl_id (pass --parquet parquet_out).
-
-- Privacy and safety:
-  - The script uses socks5h to avoid DNS leaks and sets a Tor Browser-like UA. It does not store cookies or referrers.
-  - Keep concurrency low (this script is sequential). If you add threads/async, limit to 1–3 with Tor.'''
