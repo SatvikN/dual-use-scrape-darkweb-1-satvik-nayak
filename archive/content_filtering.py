@@ -24,7 +24,7 @@ try:
 except Exception:
     HAVE_READABILITY = False
 
-TOR_SOCKS = "socks5h://127.0.0.1:9050"  # use 9150 if using Tor Browser
+TOR_SOCKS = "socks5h://127.0.0.1:9150"  # use 9150 if using Tor Browser
 PROXIES = {"http": TOR_SOCKS, "https": TOR_SOCKS}
 
 def fetch(url, use_tor=False, timeout=60):
@@ -101,7 +101,7 @@ for url in urls:
     html = fetch(url, use_tor=True)
     title, text = extract_text(html)
     print(title)
-    # print(text)
+    print(text)
     print(rules.match(title, text))
 
 # Optional: scoring and fuzzy matching

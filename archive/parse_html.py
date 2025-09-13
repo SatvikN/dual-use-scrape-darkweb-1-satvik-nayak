@@ -2,7 +2,7 @@ import requests
 from bs4 import BeautifulSoup
 from urllib.parse import urljoin
 
-TOR_SOCKS = "socks5h://127.0.0.1:9050"  # use 9150 if Tor Browser
+TOR_SOCKS = "socks5h://127.0.0.1:9150"  # use 9150 if Tor Browser
 proxies = {"http": TOR_SOCKS, "https": TOR_SOCKS}
 headers = {"User-Agent": "Mozilla/5.0"}
 

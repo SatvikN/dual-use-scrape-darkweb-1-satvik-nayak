@@ -1,0 +1,6 @@
+{
+    "all_of" : ["web"],
+    "any_of" : ["date", "snapshot"],
+    "none_of" : [],
+    "regexes" : []
+}

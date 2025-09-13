@@ -174,7 +174,7 @@ def extract_all(html: str, default_region: str | None = 'US') -> dict:
 
 # Modified code:
 import requests
-TOR_SOCKS = "socks5h://127.0.0.1:9050"  # use 9150 if Tor Browser
+TOR_SOCKS = "socks5h://127.0.0.1:9150"  # use 9150 if Tor Browser
 proxies = {"http": TOR_SOCKS, "https": TOR_SOCKS}
 headers = {"User-Agent": "Mozilla/5.0"}
 urls = ["http://g7ejphhubv5idbbu3hb3wawrs5adw7tkx7yjabnf65xtzztgg4hcsqqd.onion/", "http://archiveiya74codqgiixo33q62qlrqtkgmcitqx5u2oeqnmn5bpcbiyd.onion/"]
